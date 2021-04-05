@@ -1,0 +1,75 @@
+{
+  "name": "@stefanprobst/rehype-extract-toc",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "repository": "https://github.com/stefanprobst/rehype-extract-toc.git",
+  "author": "Stefan Probst <stefanprobst@kolabnow.com>",
+  "license": "MIT",
+  "engines": {
+    "node": ">=12.9",
+    "yarn": "1.x"
+  },
+  "scripts": {
+    "format": "prettier . -c --ignore-path .gitignore",
+    "format:fix": "yarn run format --write",
+    "lint": "eslint . --ignore-path .gitignore",
+    "lint:fix": "yarn run lint --cache --fix",
+    "test": "jest"
+  },
+  "dependencies": {
+    "hast-util-heading-rank": "^1.0.1",
+    "hast-util-to-string": "^1.0.4",
+    "unist-util-visit": "^2.0.3"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^12.1.1",
+    "@commitlint/config-conventional": "^12.1.1",
+    "@stefanprobst/commitlint-config": "^1.0.1",
+    "@stefanprobst/eslint-config-node": "^1.0.7",
+    "@stefanprobst/prettier-config": "^1.0.1",
+    "@typescript-eslint/eslint-plugin": "^4.20.0",
+    "@typescript-eslint/parser": "^4.20.0",
+    "eslint": "^7.23.0",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-import-resolver-typescript": "^2.4.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jest": "^24.3.4",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "jest": "^26.6.3",
+    "lint-staged": "^10.5.4",
+    "prettier": "^2.2.1",
+    "rehype-parse": "^7.0.1",
+    "rehype-slug": "^4.0.1",
+    "rehype-stringify": "^8.0.0",
+    "simple-git-hooks": "^2.3.1",
+    "typescript": "^4.2.3",
+    "unified": "^9.2.1"
+  },
+  "commitlint": {
+    "extends": "@stefanprobst/commitlint-config"
+  },
+  "eslintConfig": {
+    "extends": "@stefanprobst/eslint-config-node",
+    "overrides": [
+      {
+        "files": [
+          "*.test.js"
+        ],
+        "rules": {
+          "node/no-unpublished-require": "off"
+        }
+      }
+    ]
+  },
+  "lint-staged": {
+    "*.(md)": "prettier --write",
+    "*.(js)": "eslint --cache --fix"
+  },
+  "prettier": "@stefanprobst/prettier-config",
+  "simple-git-hooks": {
+    "commit-msg": "yarn commitlint --edit",
+    "pre-commit": "yarn lint-staged",
+    "pre-push": "yarn run test"
+  }
+}
