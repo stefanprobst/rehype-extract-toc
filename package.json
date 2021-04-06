@@ -1,6 +1,6 @@
 {
   "name": "@stefanprobst/rehype-extract-toc",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "src/index.js",
   "repository": "https://github.com/stefanprobst/rehype-extract-toc.git",
   "author": "Stefan Probst <stefanprobst@kolabnow.com>",

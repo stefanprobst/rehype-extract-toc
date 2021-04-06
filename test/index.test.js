@@ -10,14 +10,17 @@ const fixture = fs.readFileSync(path.join(__dirname, 'fixtures/test.html'), {
   encoding: 'utf-8',
 })
 
-const processor = unified()
-  .use(fromHtml, { fragment: true })
-  .use(withSlugs)
-  .use(withToc)
-  .use(toHtml)
+function createProcessor(includeSlugs = true) {
+  const processor = unified()
+    .use(fromHtml, { fragment: true })
+    .use(includeSlugs ? withSlugs : undefined)
+    .use(withToc)
+    .use(toHtml)
+  return processor
+}
 
 it('should attach table of contents to vfile data', async () => {
-  const { data } = await processor.process(fixture)
+  const { data } = await createProcessor().process(fixture)
 
   expect(data.toc).toMatchInlineSnapshot(`
     Array [
@@ -96,6 +99,79 @@ it('should attach table of contents to vfile data', async () => {
         ],
         "depth": 1,
         "id": "title",
+        "value": "Title",
+      },
+    ]
+  `)
+})
+
+it('should not include id property for missing ids', async () => {
+  const { data } = await createProcessor(false).process(fixture)
+
+  expect(data.toc).toMatchInlineSnapshot(`
+    Array [
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [
+                  Object {
+                    "depth": 4,
+                    "value": "Heading 1.1.1",
+                  },
+                ],
+                "depth": 3,
+                "value": "Heading 1.1",
+              },
+              Object {
+                "depth": 3,
+                "value": "Heading 1.2",
+              },
+              Object {
+                "children": Array [
+                  Object {
+                    "depth": 4,
+                    "value": "Heading 1.3.1",
+                  },
+                  Object {
+                    "depth": 4,
+                    "value": "Heading 1.3.2",
+                  },
+                ],
+                "depth": 3,
+                "value": "Heading 1.3",
+              },
+            ],
+            "depth": 2,
+            "value": "Heading 1",
+          },
+          Object {
+            "children": Array [
+              Object {
+                "depth": 3,
+                "value": "Heading 2.1",
+              },
+              Object {
+                "children": Array [
+                  Object {
+                    "depth": 4,
+                    "value": "Heading 2.2.1",
+                  },
+                ],
+                "depth": 3,
+                "value": "Heading 2.2",
+              },
+            ],
+            "depth": 2,
+            "value": "Heading 2",
+          },
+          Object {
+            "depth": 2,
+            "value": "Heading 3",
+          },
+        ],
+        "depth": 1,
         "value": "Title",
       },
     ]
