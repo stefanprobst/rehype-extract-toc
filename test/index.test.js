@@ -31,6 +31,7 @@ it('should attach table of contents to vfile data', async () => {
               Object {
                 "children": Array [
                   Object {
+                    "children": Array [],
                     "depth": 4,
                     "id": "heading-111",
                     "value": "Heading 1.1.1",
@@ -41,6 +42,7 @@ it('should attach table of contents to vfile data', async () => {
                 "value": "Heading 1.1",
               },
               Object {
+                "children": Array [],
                 "depth": 3,
                 "id": "heading-12",
                 "value": "Heading 1.2",
@@ -48,11 +50,13 @@ it('should attach table of contents to vfile data', async () => {
               Object {
                 "children": Array [
                   Object {
+                    "children": Array [],
                     "depth": 4,
                     "id": "heading-131",
                     "value": "Heading 1.3.1",
                   },
                   Object {
+                    "children": Array [],
                     "depth": 4,
                     "id": "heading-132",
                     "value": "Heading 1.3.2",
@@ -70,6 +74,7 @@ it('should attach table of contents to vfile data', async () => {
           Object {
             "children": Array [
               Object {
+                "children": Array [],
                 "depth": 3,
                 "id": "heading-21",
                 "value": "Heading 2.1",
@@ -77,6 +82,7 @@ it('should attach table of contents to vfile data', async () => {
               Object {
                 "children": Array [
                   Object {
+                    "children": Array [],
                     "depth": 4,
                     "id": "heading-221",
                     "value": "Heading 2.2.1",
@@ -92,6 +98,7 @@ it('should attach table of contents to vfile data', async () => {
             "value": "Heading 2",
           },
           Object {
+            "children": Array [],
             "depth": 2,
             "id": "heading-3",
             "value": "Heading 3",
@@ -117,6 +124,7 @@ it('should not include id property for missing ids', async () => {
               Object {
                 "children": Array [
                   Object {
+                    "children": Array [],
                     "depth": 4,
                     "value": "Heading 1.1.1",
                   },
@@ -125,16 +133,19 @@ it('should not include id property for missing ids', async () => {
                 "value": "Heading 1.1",
               },
               Object {
+                "children": Array [],
                 "depth": 3,
                 "value": "Heading 1.2",
               },
               Object {
                 "children": Array [
                   Object {
+                    "children": Array [],
                     "depth": 4,
                     "value": "Heading 1.3.1",
                   },
                   Object {
+                    "children": Array [],
                     "depth": 4,
                     "value": "Heading 1.3.2",
                   },
@@ -149,12 +160,14 @@ it('should not include id property for missing ids', async () => {
           Object {
             "children": Array [
               Object {
+                "children": Array [],
                 "depth": 3,
                 "value": "Heading 2.1",
               },
               Object {
                 "children": Array [
                   Object {
+                    "children": Array [],
                     "depth": 4,
                     "value": "Heading 2.2.1",
                   },
@@ -167,6 +180,7 @@ it('should not include id property for missing ids', async () => {
             "value": "Heading 2",
           },
           Object {
+            "children": Array [],
             "depth": 2,
             "value": "Heading 3",
           },

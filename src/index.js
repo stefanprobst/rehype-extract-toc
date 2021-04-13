@@ -28,25 +28,31 @@ function attacher() {
     }
 
     function createTree(headings) {
-      const root = { depth: 0 }
-      const parents = []
-      let previous = root
+      const root = {
+        depth: -Infinity,
+        children: [],
+        parent: undefined,
+      }
 
-      headings.forEach((heading) => {
-        if (heading.depth > previous.depth) {
-          if (previous.children === undefined) {
-            previous.children = []
-          }
-          parents.push(previous)
-        } else if (heading.depth < previous.depth) {
-          while (parents[parents.length - 1].depth >= heading.depth) {
-            parents.pop()
-          }
+      function buildTree(parent, entries) {
+        if (entries.length === 0) return
+
+        const entry = entries.shift()
+        entry.children = []
+
+        while (parent && entry.depth <= parent.depth) {
+          parent = parent.parent
         }
 
-        parents[parents.length - 1].children.push(heading)
-        previous = heading
-      })
+        parent.children.push(entry)
+
+        buildTree(
+          { depth: entry.depth, children: entry.children, parent },
+          entries,
+        )
+      }
+
+      buildTree(root, headings)
 
       return root.children
     }
