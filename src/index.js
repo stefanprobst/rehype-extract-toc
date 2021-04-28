@@ -10,7 +10,7 @@ function attacher() {
 
     visit(tree, 'element', onHeading)
 
-    vfile.data.toc = createTree(headings)
+    vfile.data.toc = createTree(headings) || []
 
     function onHeading(node) {
       const level = rank(node)

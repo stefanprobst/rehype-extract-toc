@@ -1,6 +1,6 @@
 {
   "name": "@stefanprobst/rehype-extract-toc",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "src/index.js",
   "types": "src/index.d.ts",
   "repository": "https://github.com/stefanprobst/rehype-extract-toc.git",

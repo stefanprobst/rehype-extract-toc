@@ -6,9 +6,14 @@ const toHtml = require('rehype-stringify')
 const unified = require('unified')
 const withToc = require('../src')
 
-const fixture = fs.readFileSync(path.join(__dirname, 'fixtures/test.html'), {
-  encoding: 'utf-8',
-})
+const fixtures = {
+  html: fs.readFileSync(path.join(__dirname, 'fixtures/test.html'), {
+    encoding: 'utf-8',
+  }),
+  empty: fs.readFileSync(path.join(__dirname, 'fixtures/empty.html'), {
+    encoding: 'utf-8',
+  }),
+}
 
 function createProcessor(includeSlugs = true) {
   const processor = unified()
@@ -20,7 +25,7 @@ function createProcessor(includeSlugs = true) {
 }
 
 it('should attach table of contents to vfile data', async () => {
-  const { data } = await createProcessor().process(fixture)
+  const { data } = await createProcessor().process(fixtures.html)
 
   expect(data.toc).toMatchInlineSnapshot(`
     Array [
@@ -106,7 +111,7 @@ it('should attach table of contents to vfile data', async () => {
 })
 
 it('should not include id property for missing ids', async () => {
-  const { data } = await createProcessor(false).process(fixture)
+  const { data } = await createProcessor(false).process(fixtures.html)
 
   expect(data.toc).toMatchInlineSnapshot(`
     Array [
@@ -176,4 +181,9 @@ it('should not include id property for missing ids', async () => {
       },
     ]
   `)
+})
+
+it('should return empty array when no headings found', async () => {
+  const { data } = await createProcessor(false).process(fixtures.empty)
+  expect(data.toc).toMatchInlineSnapshot(`Array []`)
 })
