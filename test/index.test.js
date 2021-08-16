@@ -1,18 +1,23 @@
-const fs = require('fs')
-const path = require('path')
-const fromHtml = require('rehype-parse')
-const withSlugs = require('rehype-slug')
-const toHtml = require('rehype-stringify')
-const unified = require('unified')
-const withToc = require('../src')
+import * as fs from 'fs'
+import * as path from 'path'
+
+import fromHtml from 'rehype-parse'
+import withSlugs from 'rehype-slug'
+import toHtml from 'rehype-stringify'
+import { unified } from 'unified'
+
+import withToc from '../src'
 
 const fixtures = {
-  html: fs.readFileSync(path.join(__dirname, 'fixtures/test.html'), {
+  html: fs.readFileSync(path.join(path.resolve('./test/fixtures/test.html')), {
     encoding: 'utf-8',
   }),
-  empty: fs.readFileSync(path.join(__dirname, 'fixtures/empty.html'), {
-    encoding: 'utf-8',
-  }),
+  empty: fs.readFileSync(
+    path.join(path.resolve('./test/fixtures/empty.html')),
+    {
+      encoding: 'utf-8',
+    },
+  ),
 }
 
 function createProcessor(includeSlugs = true) {

@@ -13,4 +13,4 @@ declare namespace withExtractedTableOfContents {
 
 declare const withExtractedTableOfContents: Plugin<[]>
 
-export = withExtractedTableOfContents
+export default withExtractedTableOfContents

@@ -1,6 +1,6 @@
-const rank = require('hast-util-heading-rank')
-const toString = require('hast-util-to-string')
-const visit = require('unist-util-visit')
+import { headingRank as rank } from 'hast-util-heading-rank'
+import { toString } from 'hast-util-to-string'
+import { visit } from 'unist-util-visit'
 
 function attacher() {
   return transformer
@@ -53,4 +53,4 @@ function attacher() {
   }
 }
 
-module.exports = attacher
+export default attacher
