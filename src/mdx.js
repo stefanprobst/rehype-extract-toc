@@ -1,8 +1,6 @@
 import { name as isIdentifierName } from 'estree-util-is-identifier-name'
 import { valueToEstree } from 'estree-util-value-to-estree'
 
-import rehypeExtractToc from './index'
-
 export default function mdx({ name = 'tableOfContents' } = {}) {
   if (!isIdentifierName(name)) {
     throw new Error(
@@ -13,8 +11,6 @@ export default function mdx({ name = 'tableOfContents' } = {}) {
   }
 
   return function transformer(tree, vfile) {
-    rehypeExtractToc(tree, vfile)
-
     if (vfile.data.toc == null) return
 
     tree.children.unshift({
