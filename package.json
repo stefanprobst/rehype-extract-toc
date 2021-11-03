@@ -8,7 +8,7 @@
   "author": "Stefan Probst <stefanprobst@kolabnow.com>",
   "license": "MIT",
   "exports": {
-    "./": {
+    ".": {
       "types": "./src/index.d.ts",
       "import": "./src/index.js"
     },
@@ -17,6 +17,9 @@
       "import": "./src/mdx.js"
     }
   },
+  "files": [
+    "src"
+  ],
   "scripts": {
     "format": "prettier . -c --ignore-path .gitignore",
     "format:fix": "yarn run format --write",
