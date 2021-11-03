@@ -12,9 +12,9 @@ yarn add @stefanprobst/rehype-extract-toc
 ## How to use
 
 ```js
-import { rehype } from require("rehype")
-import withSlugs from require("rehype-slug")
-import withToc from require("@stefanprobst/rehype-extract-toc")
+import { rehype } from "rehype"
+import withSlugs from "rehype-slug"
+import withToc from "@stefanprobst/rehype-extract-toc"
 
 const processor = rehype().use(withSlugs).use(withToc)
 
@@ -49,9 +49,9 @@ export, which defaults to `tableOfContents`.
 
 ```js
 import { compile } from '@mdx-js/mdx'
-import withSlugs from require("rehype-slug")
-import withToc from require("@stefanprobst/rehype-extract-toc")
-import withTocExport from require("@stefanprobst/rehype-extract-toc/mdx")
+import withSlugs from "rehype-slug"
+import withToc from "@stefanprobst/rehype-extract-toc"
+import withTocExport from "@stefanprobst/rehype-extract-toc/mdx"
 
 async function run() {
   const file = await compile(doc, {
