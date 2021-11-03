@@ -1,16 +1,14 @@
 import type { Plugin } from 'unified'
 
-export interface RehypeExtractTocMdxOptions {
+export interface RehypeExportTocMdxOptions {
   /**
    * The variable to export the table of contents as.
    *
-   * @default tableOfContents
+   * @default 'tableOfContents'
    */
   name?: string
 }
 
-declare const withExtractedTableOfContents: Plugin<
-  [RehypeExtractTocMdxOptions?]
->
+declare const withExportedTableOfContents: Plugin<[RehypeExportTocMdxOptions?]>
 
-export default withExtractedTableOfContents
+export default withExportedTableOfContents
