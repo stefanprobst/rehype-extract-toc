@@ -7,9 +7,15 @@
   "repository": "https://github.com/stefanprobst/rehype-extract-toc.git",
   "author": "Stefan Probst <stefanprobst@kolabnow.com>",
   "license": "MIT",
-  "engines": {
-    "node": "14.x",
-    "yarn": "1.x"
+  "exports": {
+    "./": {
+      "types": "./src/index.d.ts",
+      "import": "./src/index.js"
+    },
+    "./mdx": {
+      "types": "./src/mdx.d.ts",
+      "import": "./src/mdx.js"
+    }
   },
   "scripts": {
     "format": "prettier . -c --ignore-path .gitignore",
@@ -18,6 +24,10 @@
     "lint:fix": "yarn run lint --fix",
     "prepare": "simple-git-hooks || true",
     "test": "NODE_OPTIONS='--experimental-vm-modules' jest"
+  },
+  "engines": {
+    "node": ">=14.17",
+    "yarn": "1.x"
   },
   "dependencies": {
     "estree-util-is-identifier-name": "^2.0.0",
