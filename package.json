@@ -1,6 +1,6 @@
 {
   "name": "@stefanprobst/rehype-extract-toc",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "main": "src/index.js",
   "type": "module",
   "types": "src/index.d.ts",
@@ -18,7 +18,8 @@
     }
   },
   "files": [
-    "src"
+    "src",
+    "mdx"
   ],
   "scripts": {
     "format": "prettier . -c --ignore-path .gitignore",
