@@ -28,7 +28,7 @@ function attacher() {
     }
 
     function createTree(headings) {
-      const root = { depth: 0 }
+      const root = { depth: 0, children: [] }
       const parents = []
       let previous = root
 

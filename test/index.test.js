@@ -194,7 +194,7 @@ it('should not include id property for missing ids', async () => {
 })
 
 it('should return empty array when no headings found', async () => {
-  const { data } = await createProcessor(false).process(fixtures.empty)
+  const { data } = await createProcessor().process(fixtures.empty)
   expect(data.toc).toMatchInlineSnapshot(`Array []`)
 })
 
