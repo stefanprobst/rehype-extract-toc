@@ -12,3 +12,9 @@ export type Toc = Array<TocEntry>
 declare const withExtractedTableOfContents: Plugin<[]>
 
 export default withExtractedTableOfContents
+
+declare module 'vfile' {
+  interface DataMap {
+    toc: Toc
+  }
+}
