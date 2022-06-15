@@ -1,11 +1,11 @@
 import * as fs from 'fs'
 import * as path from 'path'
 
+import { compile } from '@mdx-js/mdx'
 import fromHtml from 'rehype-parse'
 import withSlugs from 'rehype-slug'
 import toHtml from 'rehype-stringify'
 import { unified } from 'unified'
-import { compile } from 'xdm'
 
 import withToc from '../src/index'
 import withTocExport from '../src/mdx'
@@ -14,12 +14,9 @@ const fixtures = {
   html: fs.readFileSync(path.join(path.resolve('./test/fixtures/test.html')), {
     encoding: 'utf-8',
   }),
-  empty: fs.readFileSync(
-    path.join(path.resolve('./test/fixtures/empty.html')),
-    {
-      encoding: 'utf-8',
-    },
-  ),
+  empty: fs.readFileSync(path.join(path.resolve('./test/fixtures/empty.html')), {
+    encoding: 'utf-8',
+  }),
   mdx: fs.readFileSync(path.join(path.resolve('./test/fixtures/test.mdx')), {
     encoding: 'utf-8',
   }),
@@ -223,7 +220,5 @@ it('should throw when invalid identifier name provided as named export', async (
     compile(fixtures.mdx, {
       rehypePlugins: [withSlugs, withToc, [withTocExport, { name: '##toc##' }]],
     }),
-  ).rejects.toThrow(
-    /The name should be a valid identifier name, got: "##toc##"/,
-  )
+  ).rejects.toThrow(/The name should be a valid identifier name, got: "##toc##"/)
 })
