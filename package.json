@@ -10,11 +10,13 @@
   "exports": {
     ".": {
       "types": "./src/index.d.ts",
-      "import": "./src/index.js"
+      "import": "./src/index.js",
+      "default": "./src/index.js"
     },
     "./mdx": {
       "types": "./src/mdx.d.ts",
-      "import": "./src/mdx.js"
+      "import": "./src/mdx.js",
+      "default": "./src/mdx.js"
     }
   },
   "files": [
