@@ -21,11 +21,17 @@
 			"types": "./src/mdx.d.ts",
 			"import": "./src/mdx.js",
 			"default": "./src/mdx.js"
+		},
+		"./mdsvex": {
+			"types": "./src/mdsvex.d.ts",
+			"import": "./src/mdsvex.js",
+			"default": "./src/mdsvex.js"
 		}
 	},
 	"files": [
 		"src",
-		"mdx"
+		"mdx",
+		"mdsvex"
 	],
 	"scripts": {
 		"format:check": "prettier . --cache --check",

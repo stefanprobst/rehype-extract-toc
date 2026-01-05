@@ -82,3 +82,45 @@ declare module '*.mdx' {
   export default function MDXContent(props: MDXProps): JSX.Element
 }
 ```
+
+## How to use with MDSvex
+
+When transforming [MDSvex](https://mdsvex.com/) documents, you can expose the table of contents in
+the metadata.
+
+```js
+import { compile } from "mdsvex";
+import withSlugs from "rehype-slug";
+import withToc from "@stefanprobst/rehype-extract-toc";
+import withTocExport from "@stefanprobst/rehype-extract-toc/mdsvex";
+
+async function run() {
+	const file = await compile(doc, {
+		rehypePlugins: [
+			withSlugs,
+			withToc,
+			withTocExport,
+			/** Optionally, provide a custom name for the export. */
+			// [withTocExport, { name: 'toc' }],
+		],
+	});
+
+	console.log(String(file));
+}
+
+run();
+```
+
+If you are using TypeScript, you can add typings with:
+
+```ts
+/** mdsvex.d.ts (should be referenced in `tsconfig.json#include`) */
+declare module "*.md" {
+	import type { SvelteComponent } from "svelte";
+	import type { Toc } from "@stefanprobst/rehype-extract-toc";
+
+	export default class Comp extends SvelteComponent {}
+
+	export const metadata: Record<string, unknown> & { tableOfContents: Toc };
+}
+```

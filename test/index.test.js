@@ -8,6 +8,7 @@ import toHtml from "rehype-stringify";
 import { unified } from "unified";
 
 import withToc from "../src/index";
+import withMdsvexToc from "../src/mdsvex";
 import withTocExport from "../src/mdx";
 
 const fixtures = {
@@ -222,3 +223,50 @@ it("should throw when invalid identifier name provided as named export", async (
 		}),
 	).rejects.toThrow(/The name should be a valid identifier name, got: "##toc##"/);
 });
+
+it("should attach table of contents to vfile data frontmatter for mdsvex", async () => {
+	const processor = unified()
+		.use(fromHtml, { fragment: true })
+		.use(withSlugs)
+		.use(withToc)
+		.use(withMdsvexToc)
+		.use(toHtml);
+
+	const { data } = await processor.process(fixtures.html);
+
+	expect(data.fm).toBeDefined();
+	expect(data.fm.tableOfContents).toBeDefined();
+	expect(data.fm.tableOfContents).toEqual(data.toc);
+	expect(data.fm.tableOfContents).toMatchSnapshot();
+});
+
+it("should allow custom property name in mdsvex frontmatter", async () => {
+	const processor = unified()
+		.use(fromHtml, { fragment: true })
+		.use(withSlugs)
+		.use(withToc)
+		.use(withMdsvexToc, { name: "toc" })
+		.use(toHtml);
+
+	const { data } = await processor.process(fixtures.html);
+
+	expect(data.fm).toBeDefined();
+	expect(data.fm.toc).toBeDefined();
+	expect(data.fm.toc).toEqual(data.toc);
+});
+
+it("should throw when invalid identifier name provided as property name for mdsvex", async () => {
+	const processor = unified()
+		.use(fromHtml, { fragment: true })
+		.use(withSlugs)
+		.use(withToc)
+		.use(withMdsvexToc, { name: "##toc##" })
+		.use(toHtml);
+
+	await expect(async () => processor.process(fixtures.html)).rejects.toThrow(
+		/The name should be a valid identifier name, got: "##toc##"/,
+	);
+});
+
+
+

@@ -1,0 +1,6 @@
+{
+	"internal": true,
+	"main": "../src/mdsvex.js",
+	"type": "module",
+	"types": "../src/mdsvex.d.ts"
+}
