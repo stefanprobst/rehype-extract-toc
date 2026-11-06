@@ -7,8 +7,6 @@ export default function mdx({ name = "tableOfContents" } = {}) {
 	}
 
 	return function transformer(tree, vfile) {
-		if (vfile.data.toc == null) return;
-
 		tree.children.unshift({
 			type: "mdxjsEsm",
 			data: {
@@ -27,7 +25,7 @@ export default function mdx({ name = "tableOfContents" } = {}) {
 									{
 										type: "VariableDeclarator",
 										id: { type: "Identifier", name },
-										init: valueToEstree(vfile.data.toc),
+										init: valueToEstree(vfile.data.toc || []),
 									},
 								],
 							},
