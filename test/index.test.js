@@ -20,6 +20,9 @@ const fixtures = {
 	mdx: fs.readFileSync(path.join(path.resolve("./test/fixtures/test.mdx")), {
 		encoding: "utf-8",
 	}),
+	mdxEmpty: fs.readFileSync(path.join(path.resolve("./test/fixtures/test.mdx")), {
+		encoding: "utf-8",
+	}),
 };
 
 function createProcessor(includeSlugs = true) {
@@ -202,7 +205,17 @@ it("should add named export to mdx document", async () => {
 	const data = file.data;
 
 	expect(data.toc).toHaveLength(1);
-	expect(String(file)).toMatch(/export const tableOfContents/);
+	expect(String(file)).toMatch(/export const tableOfContents = \[/);
+});
+
+it("should default to an empty array for mdx documents", async () => {
+	const file = await compile(fixtures.mdx, {
+		rehypePlugins: [withTocExport],
+	});
+	const data = file.data;
+
+	expect(data.toc).toBeUndefined();
+	expect(String(file)).toMatch(/export const tableOfContents = \[]/);
 });
 
 it("should allow custom named export in mdx document", async () => {
@@ -220,5 +233,5 @@ it("should throw when invalid identifier name provided as named export", async (
 		compile(fixtures.mdx, {
 			rehypePlugins: [withSlugs, withToc, [withTocExport, { name: "##toc##" }]],
 		}),
-	).rejects.toThrow(/The name should be a valid identifier name, got: "##toc##"/);
+	).rejects.toThrow(/Invalid identifier name: ##toc##/);
 });
