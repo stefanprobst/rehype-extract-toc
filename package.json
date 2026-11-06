@@ -37,10 +37,10 @@
 		"validate": "run-s format:check lint:check test"
 	},
 	"dependencies": {
-		"estree-util-is-identifier-name": "^3.0.0",
 		"estree-util-value-to-estree": "^3.3.3",
 		"hast-util-heading-rank": "^3.0.0",
 		"hast-util-to-string": "^3.0.1",
+		"unist-util-mdx-define": "^1.1.2",
 		"unist-util-visit": "^5.0.0"
 	},
 	"devDependencies": {

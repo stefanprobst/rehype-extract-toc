@@ -233,5 +233,5 @@ it("should throw when invalid identifier name provided as named export", async (
 		compile(fixtures.mdx, {
 			rehypePlugins: [withSlugs, withToc, [withTocExport, { name: "##toc##" }]],
 		}),
-	).rejects.toThrow(/The name should be a valid identifier name, got: "##toc##"/);
+	).rejects.toThrow(/Invalid identifier name: ##toc##/);
 });
